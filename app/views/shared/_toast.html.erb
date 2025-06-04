@@ -1,0 +1,8 @@
+<% if flash[:notice] %>
+  <div class="toast" data-controller="toast">
+    <div class="alert alert-success">
+      <%= heroicon "check-circle", options: { class: "size-6" } %>
+      <span><%= flash[:notice] %></span>
+    </div>
+  </div>
+<% end %>
