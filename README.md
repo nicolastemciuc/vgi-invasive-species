@@ -1,24 +1,20 @@
-# README
+### Requisitos
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* Ruby 3.4.4
+* PostgreSQL (preferentemente v14)
 
-Things you may want to cover:
+### Setup
 
-* Ruby version
+```
+$ git clone https://github.com/nicolastemciuc/vgi-invasive-species.git
+$ cd vgi-invasive-species/
+$ bin/setup --skip-server
+```
 
-* System dependencies
+### Levantar el servidor
 
-* Configuration
+```
+$ bin/rails s
+```
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Una vez hecho esto podés entrar a http://localhost:3000 y usar la aplicación normalmente.
