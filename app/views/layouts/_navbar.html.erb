@@ -1,0 +1,20 @@
+<div class="navbar bg-primary text-primary-content">
+  <div class="flex-1">
+    <%= link_to "VGI", root_path, class: "btn btn-ghost text-xl" %>
+  </div>
+  <div class="flex gap-2">
+    <div class="dropdown dropdown-end me-2">
+      <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar p-1">
+        <%= heroicon "user", options: { class: "text-white" }%>
+      </div>
+      <ul class="menu dropdown-content bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+        <% if user_signed_in? %>
+          <li><%= link_to "Editar Perfil", edit_user_registration_path %></li>
+          <li><%= button_to "Cerrar sesión", destroy_user_session_path, method: :delete %></li>
+        <% else %>
+          <li><%= link_to "Iniciar sesión", new_user_session_path %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
