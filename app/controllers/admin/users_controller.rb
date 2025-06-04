@@ -6,6 +6,7 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def edit
+    @user_roles = User.roles.keys.map { |r| [ r.titleize, r ] }
   end
 
   def update

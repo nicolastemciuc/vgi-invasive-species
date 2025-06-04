@@ -10,7 +10,7 @@
 
       <div class="flex flex-col">
         <%= f.label :role, class: "label" %>
-        <%= f.select :role, User.roles.keys.map { |r| [r.titleize, r] }, {}, class: "select select-bordered" %>
+        <%= f.select :role, @user_roles, {}, class: "select select-bordered" %>
       </div>
 
       <%= f.submit "Actualizar", class: "btn btn-primary w-full" %>
