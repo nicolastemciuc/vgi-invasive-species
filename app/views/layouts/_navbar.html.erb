@@ -1,18 +1,18 @@
-<div class="navbar bg-primary text-primary-content">
+<div class="navbar bg-primary">
   <div class="flex-1">
-    <%= link_to "VGI", root_path, class: "btn btn-ghost text-xl" %>
+    <%= link_to "VGI", root_path, class: "btn btn-ghost text-xl text-white hover:text-primary" %>
   </div>
   <div class="flex gap-2">
     <div class="dropdown dropdown-end me-2">
       <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar p-1">
-        <%= heroicon "user", options: { class: "text-white" }%>
+        <%= heroicon "user", options: { class: "text-white hover:text-primary" }%>
       </div>
       <ul class="menu dropdown-content bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
         <% if user_signed_in? %>
-          <li><%= link_to "Editar Perfil", edit_user_registration_path %></li>
-          <li><%= button_to "Cerrar sesión", destroy_user_session_path, method: :delete %></li>
+          <li><%= link_to "Editar Perfil", edit_user_registration_path, class: "hover:text-white hover:bg-primary" %></li>
+          <li><%= button_to "Cerrar sesión", destroy_user_session_path, method: :delete, class: "hover:text-white hover:bg-primary" %></li>
         <% else %>
-          <li><%= link_to "Iniciar sesión", new_user_session_path %></li>
+          <li><%= link_to "Iniciar sesión", new_user_session_path, class: "hover:text-white hover:bg-primary" %></li>
         <% end %>
       </ul>
     </div>
