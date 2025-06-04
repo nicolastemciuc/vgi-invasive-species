@@ -21,8 +21,11 @@ class Admin::UsersController < Admin::BaseController
     if @user == current_user
       redirect_to admin_users_path, alert: "No puedes borrarte a ti misme."
     else
-      @user.destroy
-      redirect_to admin_users_path
+      if @user.destroy
+        redirect_to admin_users_path
+      else
+        redirect_to admin_users_path, alert: "Error al borrar usuario."
+      end
     end
   end
 
