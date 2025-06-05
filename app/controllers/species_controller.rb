@@ -1,4 +1,6 @@
 class SpeciesController < ApplicationController
+  before_action :require_expert_or_admin!, except: [:index]
+
   def index
     @species = Species.all
   end
@@ -48,6 +50,10 @@ class SpeciesController < ApplicationController
   end
 
   private
+
+  def require_expert_or_admin!
+    redirect_to root_path, alert: "No tienes permiso para acceder a esta página" unless current_user&.expert? || current_user&.admin?
+  end
 
   def set_kingdoms
     @kingdoms ||= Species.kingdoms.keys.map { |k| [ k.titleize, k ] }
