@@ -1,0 +1,33 @@
+
+<div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100 mx-4">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nombre científico</th>
+        <th>Nombre común</th>
+        <th>Epíteto</th>
+        <th>Reino</th>
+        <th>Familia</th>
+        <th>Genus</th>
+        <th>Orden</th>
+        <th>Clase</th>
+        <th>Filo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @species.each do |species| %>
+        <tr>
+          <td><%= species.scientific_name %></td>
+          <td><%= species.common_name %></td>
+          <td><%= species.epithet %></td>
+          <td><%= species.kingdom %></td>
+          <td><%= species.family %></td>
+          <td><%= species.genus %></td>
+          <td><%= species.order %></td>
+          <td><%= species.class_name %></td>
+          <td><%= species.phylum %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
