@@ -1,0 +1,55 @@
+<div class="flex justify-center mt-4">
+  <div class="flex flex-col min-w-md">
+    <h2 class="text-3xl font-bold mb-6 text-center">Crear Especie</h2>
+
+    <%= form_with(model: @species, local: true, html: { class: "space-y-6 my-4" }) do |f| %>
+
+      <div class="flex flex-col">
+        <%= f.label :scientific_name, class: "label" %>
+        <%= f.text_field :scientific_name, autofocus: true, class: "input w-full" %>
+      </div>
+
+      <div class="flex flex-col">
+        <%= f.label :common_name, class: "label" %>
+        <%= f.text_field :common_name, class: "input w-full" %>
+      </div>
+
+      <div class="flex flex-col">
+        <%= f.label :epithet, class: "label" %>
+        <%= f.text_field :epithet, class: "input w-full" %>
+      </div>
+
+      <div class="flex flex-col">
+        <%= f.label :kingdom, class: "label" %>
+        <%= f.select :kingdom, @kingdoms, {}, class: "select select-bordered w-full" %>
+      </div>
+
+      <div class="flex flex-col">
+        <%= f.label :family, class: "label" %>
+        <%= f.text_field :family, class: "input w-full" %>
+      </div>
+
+      <div class="flex flex-col">
+        <%= f.label :genus, class: "label" %>
+        <%= f.text_field :genus, class: "input w-full" %>
+      </div>
+
+      <div class="flex flex-col">
+        <%= f.label :order, class: "label" %>
+        <%= f.text_field :order, class: "input w-full" %>
+      </div>
+
+      <div class="flex flex-col">
+        <%= f.label :class_name, class: "label" %>
+        <%= f.text_field :class_name, class: "input w-full" %>
+      </div>
+
+      <div class="flex flex-col">
+        <%= f.label :phylum, class: "label" %>
+        <%= f.text_field :phylum, class: "input w-full" %>
+      </div>
+
+      <%= f.submit "Crear Especie", class: "btn btn-primary w-full" %>
+    <% end %>
+  </div>
+</div
