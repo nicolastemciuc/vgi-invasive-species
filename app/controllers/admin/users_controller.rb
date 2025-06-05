@@ -6,13 +6,14 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def edit
-    @user_roles = User.roles.keys.map { |r| [ r.titleize, r ] }
+    prepare_edit_page
   end
 
   def update
     if @user.update(user_params)
       redirect_to admin_users_path
     else
+      prepare_edit_page
       render :edit, status: :unprocessable_entity
     end
   end
@@ -37,5 +38,9 @@ class Admin::UsersController < Admin::BaseController
 
   def user_params
     params.expect(user: [ :email, :role ])
+  end
+
+  def prepare_edit_page
+    @user_roles = User.roles.keys.map { |r| [ r.titleize, r ] }
   end
 end
