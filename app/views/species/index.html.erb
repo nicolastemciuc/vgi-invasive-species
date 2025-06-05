@@ -31,6 +31,9 @@
             <%= link_to edit_species_path(species), class: 'btn btn-sm btn-outline mr-2' do %>
               <%= heroicon 'pencil', options: { class: 'size-4' } %>
             <% end %>
+            <%= button_to species_path(species), method: :delete, form: { data: { turbo: true, turbo_confirm: '¿Seguro que quieres eliminar esta especie?' } }, class: 'btn btn-sm btn-outline btn-error' do %>
+              <%= heroicon 'trash', options: { class: 'size-4' } %>
+            <% end %>
           </td>
         </tr>
       <% end %>

@@ -37,6 +37,16 @@ class SpeciesController < ApplicationController
     end
   end
 
+  def destroy
+    @species = Species.find(params[:id])
+
+    if @species.destroy
+      redirect_to species_index_path, notice: "Especie eliminada correctamente"
+    else
+      redirect_to species_index_path, alert: "No se pudo eliminar la especie"
+    end
+  end
+
   private
 
   def set_kingdoms
