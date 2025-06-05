@@ -1,5 +1,5 @@
 <div class="flex justify-center mt-4">
-  <div class="flex flex-col min-w-md">
+  <div class="flex flex-col w-full mx-6 sm:max-w-md">
     <h2 class="text-3xl font-bold mb-6 text-center">Editar <%= resource_name.to_s.humanize %></h2>
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "space-y-6 my-4" }) do |f| %>
