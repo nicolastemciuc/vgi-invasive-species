@@ -23,7 +23,8 @@
   </head>
 
   <body>
-    <main class="container min-w-screen">
+    <main class="container min-w-screen" data-controller="drawer">
+      <%= render "shared/drawer" %>
       <%= render "layouts/navbar" %>
       <%= render "shared/toast" %>
 

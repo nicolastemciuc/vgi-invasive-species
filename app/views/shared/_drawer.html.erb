@@ -1,0 +1,7 @@
+<div data-drawer-target="drawer" class="fixed inset-y-0 w-64 bg-white transform -translate-x-full transition-transform duration-300 z-50 space-y-2 font-semibold text-sm px-3" >
+  <ul class="space-y-2 font-bold my-4">
+    <li><%= link_to "Species", species_index_path, class: "flex items-center p-2 text-gray-900 rounded-sm hover:bg-primary hover:text-white" %></li>
+  </ul>
+</div>
+
+<div data-drawer-target="overlay" data-action="click->drawer#toggle" class="fixed inset-0 bg-black/30 hidden z-40"></div>
