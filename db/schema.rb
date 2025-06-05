@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_05_020853) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_05_014946) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "postgis"
@@ -30,6 +30,22 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_05_020853) do
     t.index ["scientific_name"], name: "index_species_on_scientific_name", unique: true
   end
 
+  create_table "sightings", force: :cascade do |t|
+    t.decimal "latitude", precision: 9, scale: 6
+    t.decimal "longitude", precision: 9, scale: 6
+    t.bigint "submitted_by_id", null: false
+    t.text "location_description"
+    t.text "description"
+    t.string "status"
+    t.date "sighting_date"
+    t.bigint "validated_by_id"
+    t.datetime "validated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["submitted_by_id"], name: "index_sightings_on_submitted_by_id"
+    t.index ["validated_by_id"], name: "index_sightings_on_validated_by_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -42,4 +58,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_05_020853) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
+
+  add_foreign_key "sightings", "users", column: "submitted_by_id"
+  add_foreign_key "sightings", "users", column: "validated_by_id"
 end
