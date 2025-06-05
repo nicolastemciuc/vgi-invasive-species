@@ -10,10 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_30_030033) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_05_020853) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "postgis"
+
+  create_table "species", force: :cascade do |t|
+    t.integer "kingdom", null: false
+    t.string "phylum"
+    t.string "class_name"
+    t.string "order"
+    t.string "family"
+    t.string "genus", null: false
+    t.string "epithet", null: false
+    t.string "scientific_name", null: false
+    t.string "common_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["scientific_name"], name: "index_species_on_scientific_name", unique: true
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
