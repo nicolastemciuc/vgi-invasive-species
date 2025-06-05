@@ -8,57 +8,57 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-Species.find_or_create_by(scientific_name: "Homo sapiens") do |species|
+Species.find_or_create_by(scientific_name: "Rattus rattus") do |species|
   species.kingdom = :animalia
   species.phylum = "Chordata"
   species.class_name = "Mammalia"
-  species.order = "Primates"
-  species.family = "Hominidae"
-  species.genus = "Homo"
-  species.epithet = "sapiens"
-  species.common_name = "Human"
+  species.order = "Rodentia"
+  species.family = "Muridae"
+  species.genus = "Rattus"
+  species.epithet = "rattus"
+  species.common_name = "Rata negra"
 end
 
-Species.find_or_create_by(scientific_name: "Canis lupus") do |species|
-  species.kingdom = :animalia
-  species.phylum = "Chordata"
-  species.class_name = "Mammalia"
-  species.order = "Carnivora"
-  species.family = "Canidae"
-  species.genus = "Canis"
-  species.epithet = "lupus"
-  species.common_name = "Gray wolf"
-end
-
-Species.find_or_create_by(scientific_name: "Rosa canina") do |species|
+Species.find_or_create_by(scientific_name: "Lantana camara") do |species|
   species.kingdom = :plantae
-  species.phylum = "Magnoliophyta"
+  species.phylum = "Tracheophyta"
   species.class_name = "Magnoliopsida"
-  species.order = "Rosales"
-  species.family = "Rosaceae"
-  species.genus = "Rosa"
-  species.epithet = "canina"
-  species.common_name = "Dog rose"
+  species.order = "Lamiales"
+  species.family = "Verbenaceae"
+  species.genus = "Lantana"
+  species.epithet = "camara"
+  species.common_name = "Lantana"
 end
 
-Species.find_or_create_by(scientific_name: "Agaricus bisporus") do |species|
+Species.find_or_create_by(scientific_name: "Mytilus galloprovincialis") do |species|
+  species.kingdom = :animalia
+  species.phylum = "Mollusca"
+  species.class_name = "Bivalvia"
+  species.order = "Mytilida"
+  species.family = "Mytilidae"
+  species.genus = "Mytilus"
+  species.epithet = "galloprovincialis"
+  species.common_name = "Mejillón del Mediterráneo"
+end
+
+Species.find_or_create_by(scientific_name: "Parthenium hysterophorus") do |species|
+  species.kingdom = :plantae
+  species.phylum = "Tracheophyta"
+  species.class_name = "Magnoliopsida"
+  species.order = "Asterales"
+  species.family = "Asteraceae"
+  species.genus = "Parthenium"
+  species.epithet = "hysterophorus"
+  species.common_name = "Hierba de Santa María"
+end
+
+Species.find_or_create_by(scientific_name: "Armillaria mellea") do |species|
   species.kingdom = :fungi
   species.phylum = "Basidiomycota"
   species.class_name = "Agaricomycetes"
   species.order = "Agaricales"
-  species.family = "Agaricaceae"
-  species.genus = "Agaricus"
-  species.epithet = "bisporus"
-  species.common_name = "White mushroom"
-end
-
-Species.find_or_create_by(scientific_name: "Escherichia coli") do |species|
-  species.kingdom = :bacteria
-  species.phylum = "Proteobacteria"
-  species.class_name = "Gammaproteobacteria"
-  species.order = "Enterobacterales"
-  species.family = "Enterobacteriaceae"
-  species.genus = "Escherichia"
-  species.epithet = "coli"
-  species.common_name = "E. coli"
+  species.family = "Physalacriaceae"
+  species.genus = "Armillaria"
+  species.epithet = "mellea"
+  species.common_name = "Hongo de la miel"
 end
