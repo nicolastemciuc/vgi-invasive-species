@@ -4,7 +4,8 @@ module SightingsHelper
       {
         lat: s.latitude,
         lng: s.longitude,
-        description: s.description
+        description: s.description,
+        url: sighting_path(s)
       }
     end.to_json
   end

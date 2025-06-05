@@ -5,6 +5,10 @@ class SightingsController < ApplicationController
     @sightings = Sighting.all
   end
 
+  def show
+    @sighting = Sighting.find(params[:id])
+  end
+
   def new
     @sighting = Sighting.new(
       latitude: params[:lat],

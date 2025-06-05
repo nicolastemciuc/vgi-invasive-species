@@ -48,11 +48,16 @@ export default class extends Controller {
     })
 
     this.sightingsValue.forEach((sighting) => {
-          if (sighting.lat && sighting.lng) {
-            L.marker([sighting.lat, sighting.lng])
-              .addTo(map)
-              .bindPopup(`${sighting.description || "Sin descripción"}`)
-          }
-        })
+      if (sighting.lat && sighting.lng) {
+        L.marker([sighting.lat, sighting.lng])
+          .addTo(map)
+          .bindPopup(`
+                      ${sighting.description || "Sin descripción"}<br>
+                      <a href="${sighting.url}" class="underline text-blue-700 font-semibold">
+                        Ver avistamiento
+                      </a>
+                    `)
+      }
+    })
   }
 }
