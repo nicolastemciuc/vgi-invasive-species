@@ -1,3 +1,4 @@
+<h1 class="flex-1 text-3xl font-bold text-center text-primary m-4">Especies</h1>
 
 <div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100 mx-4">
   <table class="table">
@@ -26,8 +27,24 @@
           <td><%= species.order %></td>
           <td><%= species.class_name %></td>
           <td><%= species.phylum %></td>
+          <% if current_user&.admin? || current_user&.expert? %>
+            <td class="flex">
+              <%= link_to edit_species_path(species), class: 'btn btn-sm btn-outline mr-2' do %>
+                <%= heroicon 'pencil', options: { class: 'size-4' } %>
+              <% end %>
+              <%= button_to species_path(species), method: :delete, form: { data: { turbo: true, turbo_confirm: '¿Seguro que quieres eliminar esta especie?' } }, class: 'btn btn-sm btn-outline btn-error' do %>
+                <%= heroicon 'trash', options: { class: 'size-4' } %>
+              <% end %>
+            </td>
+          <% end %>
         </tr>
       <% end %>
     </tbody>
   </table>
 </div>
+
+<% if current_user&.admin? || current_user&.expert? %>
+  <%= link_to new_species_path, class: 'toast bg-primary text-white p-4 rounded-full hover:bg-secondary' do %>
+    <%= heroicon 'plus', options: { class: 'size-6' } %>
+  <% end %>
+<% end %>
