@@ -1,5 +1,5 @@
 class SpeciesController < ApplicationController
-  before_action :require_expert_or_admin!, except: [:index]
+  before_action :require_expert_or_admin!, except: [ :index ]
 
   def index
     @species = Species.all
