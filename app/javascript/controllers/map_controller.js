@@ -36,11 +36,6 @@ export default class extends Controller {
       attribution: '&copy; OpenStreetMap contributors',
     }).addTo(map)
 
-    L.marker([-34.9011, -56.1645])
-      .addTo(map)
-      .bindPopup("Montevideo")
-      .openPopup()
-
     map.on("click", (e) => {
       const { lat, lng } = e.latlng
       const url = `/sightings/new?lat=${lat}&lng=${lng}`
