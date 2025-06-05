@@ -27,6 +27,11 @@
           <td><%= species.order %></td>
           <td><%= species.class_name %></td>
           <td><%= species.phylum %></td>
+          <td class="flex">
+            <%= link_to edit_species_path(species), class: 'btn btn-sm btn-outline mr-2' do %>
+              <%= heroicon 'pencil', options: { class: 'size-4' } %>
+            <% end %>
+          </td>
         </tr>
       <% end %>
     </tbody>

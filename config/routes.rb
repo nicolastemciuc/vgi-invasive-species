@@ -11,5 +11,5 @@ Rails.application.routes.draw do
     resources :users, except: [ :create ]
   end
 
-  resources :species, only: [ :index, :new, :create ]
+  resources :species, only: [ :index, :new, :create, :edit, :update ]
 end

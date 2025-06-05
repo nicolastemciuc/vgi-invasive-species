@@ -20,6 +20,23 @@ class SpeciesController < ApplicationController
     end
   end
 
+  def edit
+    @species = Species.find(params[:id])
+
+    set_kingdoms
+  end
+
+  def update
+    @species = Species.find(params[:id])
+
+    if @species.update(species_params)
+      redirect_to species_index_path, notice: "Especie actualizada correctamente"
+    else
+      set_kingdoms
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def set_kingdoms
