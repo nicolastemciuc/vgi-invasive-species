@@ -2,6 +2,11 @@
   <div class="flex-1">
     <%= link_to "VGI", root_path, class: "btn btn-ghost text-xl text-white hover:text-primary" %>
   </div>
+  <% if current_user&.admin? %>
+    <div class="flex mr-5">
+      <%= link_to "Manage Users", admin_users_path, class: "btn btn-secondary" %>
+    </div>
+  <% end %>
   <div class="flex gap-2">
     <div class="dropdown dropdown-end me-2">
       <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar p-1">
