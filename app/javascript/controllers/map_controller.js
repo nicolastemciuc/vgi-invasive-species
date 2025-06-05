@@ -39,5 +39,11 @@ export default class extends Controller {
       .addTo(map)
       .bindPopup("Montevideo")
       .openPopup()
+
+    map.on("click", (e) => {
+      const { lat, lng } = e.latlng
+      const url = `/sightings/new?lat=${lat}&lng=${lng}`
+      window.location.href = url
+    })
   }
 }
