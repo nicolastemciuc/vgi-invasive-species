@@ -6,6 +6,7 @@ export default class extends Controller {
     iconUrl: String,
     iconRetinaUrl: String,
     shadowUrl: String,
+    sightings: Array,
   }
 
   connect() {
@@ -45,5 +46,13 @@ export default class extends Controller {
       const url = `/sightings/new?lat=${lat}&lng=${lng}`
       window.location.href = url
     })
+
+    this.sightingsValue.forEach((sighting) => {
+          if (sighting.lat && sighting.lng) {
+            L.marker([sighting.lat, sighting.lng])
+              .addTo(map)
+              .bindPopup(`${sighting.description || "Sin descripción"}`)
+          }
+        })
   }
 }
