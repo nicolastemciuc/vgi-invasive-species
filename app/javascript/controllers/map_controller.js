@@ -6,6 +6,7 @@ export default class extends Controller {
     iconUrl: String,
     iconRetinaUrl: String,
     shadowUrl: String,
+    sightings: Array,
   }
 
   connect() {
@@ -35,9 +36,23 @@ export default class extends Controller {
       attribution: '&copy; OpenStreetMap contributors',
     }).addTo(map)
 
-    L.marker([-34.9011, -56.1645])
-      .addTo(map)
-      .bindPopup("Montevideo")
-      .openPopup()
+    map.on("click", (e) => {
+      const { lat, lng } = e.latlng
+      const url = `/sightings/new?lat=${lat}&lng=${lng}`
+      window.location.href = url
+    })
+
+    this.sightingsValue.forEach((sighting) => {
+      if (sighting.lat && sighting.lng) {
+        L.marker([sighting.lat, sighting.lng])
+          .addTo(map)
+          .bindPopup(`
+                      ${sighting.description || "Sin descripción"}<br>
+                      <a href="${sighting.url}" class="underline text-blue-700 font-semibold">
+                        Ver avistamiento
+                      </a>
+                    `)
+      }
+    })
   }
 }
