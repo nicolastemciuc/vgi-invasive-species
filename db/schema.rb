@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_07_161356) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_07_193005) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "postgis"
@@ -27,8 +27,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_07_161356) do
     t.datetime "validated_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "species_id"
-    t.string "int"
+    t.integer "species_id"
     t.index ["submitted_by_id"], name: "index_sightings_on_submitted_by_id"
     t.index ["validated_by_id"], name: "index_sightings_on_validated_by_id"
   end

@@ -30,10 +30,7 @@
 
       <div class="flex flex-col mb-4">
         <%= f.label :species_id, "Especie encontrada", class: "label" %>
-        <%= f.select :species_id, 
-              @species.map { |s| ["#{s.common_name} (#{s.scientific_name})", s.id] },
-              {}, 
-              class: "input w-full" %>
+        <%= f.select :species_id, @species_map, {}, class: "select w-full" %>
       </div>
 
       <%= f.submit "Reportar", class: "btn btn-primary w-full" %>
