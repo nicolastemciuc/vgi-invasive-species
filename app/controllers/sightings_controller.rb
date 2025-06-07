@@ -14,6 +14,7 @@ class SightingsController < ApplicationController
       latitude: params[:lat],
       longitude: params[:lng]
     )
+    @species = Species.all
   end
 
   def create
@@ -30,6 +31,6 @@ class SightingsController < ApplicationController
   private
 
   def sighting_params
-    params.expect(sighting: [ :latitude, :longitude, :location_desc, :description, :sighting_date ])
+    params.require(:sighting).permit(:latitude, :longitude, :location_desc, :description, :sighting_date, :species_id)
   end
 end
