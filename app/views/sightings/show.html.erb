@@ -5,7 +5,7 @@
 
       <p><strong>Latitud:</strong> <%= @sighting.latitude %></p>
       <p><strong>Longitud:</strong> <%= @sighting.longitude %></p>
-      <p><strong>Especie avistada:</strong> <%= "#{@sighting.species.common_name} (#{@sighting.species.scientific_name})"%></p>
+      <p><strong>Especie encontrada:</strong> <%= "#{@sighting.species.common_name} (#{@sighting.species.scientific_name})"%></p>
       <p><strong>Descripción:</strong> <%= @sighting.description || "Sin descripción" %></p>
       <p><strong>Description del lugar:</strong> <%= @sighting.location_description || "Sin descripción" %></p>
 
