@@ -6,4 +6,6 @@ class Sighting < ApplicationRecord
 
   validates :latitude, :longitude, :sighting_date, presence: true
   validates :status, inclusion: { in: %w[Pendiente Confirmado Rechazado] }
+
+  scope :confirmed, -> { where(status: "Confirmado") }
 end

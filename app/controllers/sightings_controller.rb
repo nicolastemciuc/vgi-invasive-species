@@ -3,7 +3,7 @@ class SightingsController < ApplicationController
   before_action :load_species_map, only: [ :new, :create ]
 
   def index
-    @sightings = Sighting.all
+    @sightings = current_user&.expert? ? Sighting.all : Sighting.confirmed
   end
 
   def show
