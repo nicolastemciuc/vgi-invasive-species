@@ -31,7 +31,7 @@ class SightingsController < ApplicationController
   private
 
   def sighting_params
-    params.expect(sighting: [ :latitude, :longitude, :location_desc, :description, :sighting_date, :species_id ])
+    params.expect(sighting: [ :latitude, :longitude, :location_desc, :description, :sighting_date, :species_id, :photo ])
   end
 
   def load_species_map
