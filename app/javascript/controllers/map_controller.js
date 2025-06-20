@@ -1,5 +1,6 @@
 import { Controller } from "@hotwired/stimulus"
 import L from "leaflet"
+import "@geoman-io/leaflet-geoman-free"
 
 export default class extends Controller {
   static values = {
@@ -31,6 +32,11 @@ export default class extends Controller {
       minZoom: 7,
       maxZoom: 15,
     })
+
+    // add Leaflet-Geoman controls with some options to the map
+    map.pm.addControls({
+      position: 'topleft',
+    });
 
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       attribution: '&copy; OpenStreetMap contributors',
