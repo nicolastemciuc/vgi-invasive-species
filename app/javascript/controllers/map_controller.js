@@ -42,11 +42,13 @@ export default class extends Controller {
       attribution: '&copy; OpenStreetMap contributors',
     }).addTo(map)
 
-    map.on("click", (e) => {
-      const { lat, lng } = e.latlng
-      const url = `/sightings/new?lat=${lat}&lng=${lng}`
-      window.location.href = url
-    })
+    map.on("pm:drawstart", ({ workingLayer }) => {
+      workingLayer.on("pm:snap", (e) => {
+        const { lat, lng } = e.marker._latlng
+        const url = `/sightings/new?lat=${lat}&lng=${lng}`
+        window.location.href = url
+      });
+    });
 
     this.sightingsValue.forEach((sighting) => {
       if (sighting.lat && sighting.lng) {
