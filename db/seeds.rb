@@ -62,3 +62,18 @@ Species.find_or_create_by(scientific_name: "Armillaria mellea") do |species|
   species.epithet = "mellea"
   species.common_name = "Hongo de la miel"
 end
+
+User.find_or_create_by!(email: "admin@mail.com") do |user|
+  user.password = "password"
+  user.role = :admin
+end
+
+User.find_or_create_by!(email: "citizen@mail.com") do |user|
+  user.password = "password"
+  user.role = :citizen
+end
+
+User.find_or_create_by!(email: "expert@mail.com") do |user|
+  user.password = "password"
+  user.role = :expert
+end
