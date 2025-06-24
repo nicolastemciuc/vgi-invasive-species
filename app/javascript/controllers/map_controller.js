@@ -41,6 +41,19 @@ export default class extends Controller {
     // add Leaflet-Geoman controls with some options to the map
     map.pm.addControls({
       position: 'topleft',
+      drawMarker: true,
+      drawPolygon: false,
+      drawPolyline: false,
+      drawCircle: false,
+      drawCircleMarker: false,
+      drawRectangle: false,
+      drawText: false,
+      editMode: false,
+      editControls: false,
+      cutPolygon: false,
+      removalMode: false,
+      rotateMode: false,
+      showCompass: false,
     });
 
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
