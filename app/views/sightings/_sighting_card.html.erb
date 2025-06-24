@@ -1,26 +1,38 @@
-<div class="card card-xl">
-  <button class="absolute top-2 right-2 btn btn-sm btn-outline" data-action="click->sighting#close">
+<div class="card w-full max-w-2xl h-full bg-base-100 shadow-xl relative">
+  <button class="btn btn-sm btn-circle btn-ghost absolute top-2 right-2" data-action="click->sighting#close">
     ✕
   </button>
 
-  <div class="card-body">
-    <h2 class="card-title">Avistamiento #<%= sighting.id %></h2>
+  <div class="card-body space-y-2 mt-2">
+    <div class="mt-4 flex justify-center">
+      <%= image_tag(
+        sighting.photo.attached? ? url_for(@sighting.photo) : "https://camarasal.com/wp-content/uploads/2020/08/default-image-5-1.jpg",
+        class: "rounded-xl shadow max-w-full h-auto"
+      ) %>
+    </div>
 
-    <p><strong>Latitud:</strong> <%= sighting.latitude %></p>
-    <p><strong>Longitud:</strong> <%= sighting.longitude %></p>
-    <p><strong>Especie encontrada:</strong> <%= "#{sighting.species.common_name} (#{@sighting.species.scientific_name})"%></p>
-    <p><strong>Descripción:</strong> <%= sighting.description || "Sin descripción" %></p>
-    <p><strong>Descripción del lugar:</strong> <%= sighting.location_description || "Sin descripción" %></p>
+    <div class="divider my-2"></div>
 
-    <hr>
-    <p><strong>Estado:</strong> <%= sighting.status %></p>
-    <p><strong>Reportado por:</strong> <%= sighting.submitted_by.email %></p>
-    <p><strong>Validado por:</strong> <%= sighting.validated_by&.email || "Pendiente" %></p>
-    <p><strong>Fecha de validación:</strong> <%= sighting.validated_at ? @sighting.validated_at.to_fs(:short) : "Pendiente" %></p>
+    <h2 class="card-title text-2xl font-bold">
+      Avistamiento #<%= sighting.id %>
+    </h2>
 
-    <%= image_tag(
-      sighting.photo.attached? ? url_for(@sighting.photo) : "https://camarasal.com/wp-content/uploads/2020/08/default-image-5-1.jpg",
-      class: "rounded max-w-md"
-    ) %>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <p><span class="font-semibold">Latitud:</span> <%= sighting.latitude %></p>
+      <p><span class="font-semibold">Longitud:</span> <%= sighting.longitude %></p>
+      <p class="sm:col-span-2"><span class="font-semibold">Especie encontrada:</span> <%= "#{sighting.species.common_name} (#{@sighting.species.scientific_name})" %></p>
+      <p class="sm:col-span-2"><span class="font-semibold">Descripción:</span> <%= sighting.description || "Sin descripción" %></p>
+      <p class="sm:col-span-2"><span class="font-semibold">Descripción del lugar:</span> <%= sighting.location_description || "Sin descripción" %></p>
+    </div>
+
+    <div class="divider my-2"></div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <p><span class="font-semibold">Estado:</span> <%= sighting.status %></p>
+      <p><span class="font-semibold">Reportado por:</span> <%= sighting.submitted_by.email %></p>
+      <p><span class="font-semibold">Validado por:</span> <%= sighting.validated_by&.email || "Pendiente" %></p>
+      <p><span class="font-semibold">Fecha de validación:</span> <%= sighting.validated_at ? @sighting.validated_at.to_fs(:short) : "Pendiente" %></p>
+    </div>
+
   </div>
 </div>
