@@ -15,11 +15,10 @@
       <p><strong>Validado por:</strong> <%= @sighting.validated_by&.email || "Pendiente" %></p>
       <p><strong>Fecha de validación:</strong> <%= @sighting.validated_at ? @sighting.validated_at.to_fs(:short) : "Pendiente" %></p>
 
-      <% if @sighting.photo.attached? %>
-        <%= image_tag @sighting.photo, class: "rounded max-w-md" %>
-      <% else %>
-        <p>Sin foto adjunta.</p>
-      <% end %>
+      <%= image_tag(
+        @sighting.photo.attached? ? url_for(@sighting.photo) : "https://camarasal.com/wp-content/uploads/2020/08/default-image-5-1.jpg",
+        class: "rounded max-w-md"
+      ) %>
 
       <div class="justify-center card-actions mt-4">
         <%= link_to "Volver al mapa", sightings_path, class: "btn btn-outline btn-sm" %>
