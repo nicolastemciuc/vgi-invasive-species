@@ -52,7 +52,7 @@
     <div class="divider my-2"></div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-      <p><span class="font-semibold">Estado:</span> <%= sighting.status %></p>
+      <p><span class="font-semibold">Estado:</span> <%= sighting.status_value %></p>
       <p><span class="font-semibold">Reportado por:</span> <%= sighting.submitted_by.email %></p>
       <p><span class="font-semibold">Validado por:</span> <%= sighting.validated_by&.email || "Pendiente" %></p>
       <p><span class="font-semibold">Fecha de validación:</span> <%= sighting.validated_at ? @sighting.validated_at.to_fs(:short) : "Pendiente" %></p>
@@ -60,11 +60,17 @@
 
     <% if current_user&.expert? %>
       <div class="mt-6 flex justify-center gap-4">
-        <%= button_to 'Confirmar', update_status_sighting_path(sighting, status: 'Confirmado'),
-          method: :patch, class: "btn btn-success rounded-full px-6" %>
+        <%= button_to 'Confirmar',
+          sighting_path(sighting),
+          method: :patch,
+          params: { sighting: { status: 'Confirmado' } },
+          class: "btn btn-success rounded-full px-6" %>
 
-        <%= button_to 'Rechazar', update_status_sighting_path(sighting, status: 'Rechazado'),
-          method: :patch, class: "btn btn-error rounded-full px-6" %>
+        <%= button_to 'Rechazar',
+          sighting_path(sighting),
+          method: :patch,
+          params: { sighting: { status: 'Rechazado' } },
+          class: "btn btn-error rounded-full px-6" %>
       </div>
     <% end %>
   </div>

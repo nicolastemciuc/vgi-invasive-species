@@ -38,15 +38,12 @@ class SightingsController < ApplicationController
     end
   end
 
-  def update_status
-    status = params[:status]
+  def update
     @sighting = Sighting.find(params[:id])
-
-    if Sighting::STATUSES.include?(status)
-      @sighting.update(status: status)
-      redirect_to @sighting, notice: "Estado actualizado a #{params[:status]}"
+    if @sighting.update(update_params)
+      redirect_to @sighting, notice: "Avistamiento actualizado con éxito."
     else
-      redirect_to @sighting, alert: "Estado inválido"
+      redirect_to @sighting, alert: "Error al actualizar"
     end
   end
 
@@ -54,6 +51,10 @@ class SightingsController < ApplicationController
 
   def sighting_params
     params.expect(sighting: [ :latitude, :longitude, :location_desc, :description, :sighting_date, :species_id, :photo ])
+  end
+
+  def update_params
+    params.expect(sighting: [ :status ])
   end
 
   def load_species_map
