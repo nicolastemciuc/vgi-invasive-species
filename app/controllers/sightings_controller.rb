@@ -3,7 +3,7 @@ class SightingsController < ApplicationController
   before_action :load_species_map, only: [ :new, :create ]
 
   def index
-    @sightings = Sighting.all
+    @sightings = current_user&.expert? ? Sighting.all : Sighting.confirmed
   end
 
   def show
@@ -38,10 +38,23 @@ class SightingsController < ApplicationController
     end
   end
 
+  def update
+    @sighting = Sighting.find(params[:id])
+    if @sighting.update(update_params)
+      redirect_to @sighting, notice: "Avistamiento actualizado con éxito."
+    else
+      redirect_to @sighting, alert: "Error al actualizar"
+    end
+  end
+
   private
 
   def sighting_params
     params.expect(sighting: [ :latitude, :longitude, :location_desc, :description, :sighting_date, :species_id, :photo ])
+  end
+
+  def update_params
+    params.expect(sighting: [ :status ])
   end
 
   def load_species_map

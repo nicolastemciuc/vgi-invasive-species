@@ -5,7 +5,11 @@ class Sighting < ApplicationRecord
   has_one_attached :photo
 
   validates :latitude, :longitude, :sighting_date, presence: true
-  validates :status, inclusion: { in: %w[Pendiente Confirmado Rechazado] }
+  enum :status, { pending: "Pendiente", confirmed: "Confirmado", rejected: "Rechazado" }
+
+  def status_value
+    self.class.statuses[status]
+  end
 end
 
 # == Schema Information
