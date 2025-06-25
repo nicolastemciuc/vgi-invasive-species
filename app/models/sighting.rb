@@ -7,3 +7,32 @@ class Sighting < ApplicationRecord
   validates :latitude, :longitude, :sighting_date, presence: true
   validates :status, inclusion: { in: %w[Pendiente Confirmado Rechazado] }
 end
+
+# == Schema Information
+#
+# Table name: sightings
+#
+#  id                   :bigint           not null, primary key
+#  description          :text
+#  latitude             :decimal(9, 6)
+#  location_description :text
+#  longitude            :decimal(9, 6)
+#  sighting_date        :date
+#  status               :string
+#  validated_at         :datetime
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  species_id           :integer
+#  submitted_by_id      :bigint           not null
+#  validated_by_id      :bigint
+#
+# Indexes
+#
+#  index_sightings_on_submitted_by_id  (submitted_by_id)
+#  index_sightings_on_validated_by_id  (validated_by_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (submitted_by_id => users.id)
+#  fk_rails_...  (validated_by_id => users.id)
+#

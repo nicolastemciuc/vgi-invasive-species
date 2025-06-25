@@ -1,7 +1,7 @@
 ---
 :position: before
 :position_in_additional_file_patterns: before
-:position_in_class: before
+:position_in_class: after
 :position_in_factory: before
 :position_in_fixture: before
 :position_in_routes: before
