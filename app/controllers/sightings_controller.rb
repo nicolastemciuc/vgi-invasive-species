@@ -38,6 +38,18 @@ class SightingsController < ApplicationController
     end
   end
 
+  def update_status
+    status = params[:status]
+    @sighting = Sighting.find(params[:id])
+
+    if Sighting::STATUSES.include?(status)
+      @sighting.update(status: status)
+      redirect_to @sighting, notice: "Estado actualizado a #{params[:status]}"
+    else
+      redirect_to @sighting, alert: "Estado inválido"
+    end
+  end
+
   private
 
   def sighting_params
