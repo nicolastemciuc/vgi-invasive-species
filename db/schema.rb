@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_28_201910) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_28_202820) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "postgis"
@@ -56,6 +56,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_28_201910) do
     t.integer "species_id"
     t.string "type", null: false
     t.geography "point", limit: {srid: 4326, type: "st_point", geographic: true}
+    t.geography "path", limit: {srid: 4326, type: "line_string", geographic: true}
     t.index ["submitted_by_id"], name: "index_sightings_on_submitted_by_id"
     t.index ["validated_by_id"], name: "index_sightings_on_validated_by_id"
   end

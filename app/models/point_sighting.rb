@@ -9,6 +9,7 @@ end
 #  id                   :bigint           not null, primary key
 #  description          :text
 #  location_description :text
+#  path                 :geography        linestring, 4326
 #  point                :geography        point, 4326
 #  sighting_date        :date
 #  status               :string
