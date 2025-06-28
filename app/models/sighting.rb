@@ -18,9 +18,7 @@ end
 #
 #  id                   :bigint           not null, primary key
 #  description          :text
-#  latitude             :decimal(9, 6)
 #  location_description :text
-#  longitude            :decimal(9, 6)
 #  sighting_date        :date
 #  status               :string
 #  validated_at         :datetime

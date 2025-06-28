@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_13_234639) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_28_153838) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "postgis"
@@ -44,8 +44,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_13_234639) do
   end
 
   create_table "sightings", force: :cascade do |t|
-    t.decimal "latitude", precision: 9, scale: 6
-    t.decimal "longitude", precision: 9, scale: 6
     t.bigint "submitted_by_id", null: false
     t.text "location_description"
     t.text "description"
