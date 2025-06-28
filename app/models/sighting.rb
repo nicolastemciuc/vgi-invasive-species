@@ -21,6 +21,7 @@ end
 #  location_description :text
 #  sighting_date        :date
 #  status               :string
+#  type                 :string           not null
 #  validated_at         :datetime
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
