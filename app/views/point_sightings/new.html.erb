@@ -2,14 +2,14 @@
   <div class="flex flex-col min-w-md">
     <h2 class="text-3xl font-bold mb-6 text-center">Reportar Avistamiento</h2>
 
-    <%= form_with model: @sighting, local: true do |f| %>
-      <%= f.hidden_field :latitude %>
-      <%= f.hidden_field :longitude %>
+    <%= form_with model: @point_sighting, local: true do |f| %>
+      <%= f.hidden_field :latitude, value: @latitude %>
+      <%= f.hidden_field :longitude, value: @longitude %>
 
       <div class="mb-4">
         <p class="text-gray-600 text-sm">
           Ubicación seleccionada:
-          <span class="font-mono text-black"><%= @sighting.latitude %>, <%= @sighting.longitude %></span>
+          <span class="font-mono text-black"><%= @latitude %>, <%= @longitude %></span>
         </p>
       </div>
 

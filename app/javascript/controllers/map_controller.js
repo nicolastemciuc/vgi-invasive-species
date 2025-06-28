@@ -63,7 +63,7 @@ export default class extends Controller {
     map.on("pm:drawstart", ({ workingLayer }) => {
       workingLayer.on("pm:snap", (e) => {
         const { lat, lng } = e.marker._latlng
-        const url = `/sightings/new?lat=${lat}&lng=${lng}`
+        const url = `/point_sightings/new?lat=${lat}&lng=${lng}`
         window.location.href = url
       });
     });
