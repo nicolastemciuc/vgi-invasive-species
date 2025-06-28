@@ -50,7 +50,7 @@ class PointSightingsController < ApplicationController
   private
 
   def sighting_params
-    params.expect(point_sighting: [:location_desc, :description, :sighting_date, :species_id, :photo, :latitude, :longitude ])
+    params.expect(point_sighting: [ :location_desc, :description, :sighting_date, :species_id, :photo, :latitude, :longitude ])
   end
 
   def update_params
