@@ -15,6 +15,7 @@ end
 #  status               :string
 #  type                 :string           not null
 #  validated_at         :datetime
+#  zone                 :geography        polygon, 4326
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #  species_id           :integer
