@@ -4,7 +4,7 @@ class Sighting < ApplicationRecord
   belongs_to :species
   has_one_attached :photo
 
-  validates :latitude, :longitude, :sighting_date, presence: true
+  validates :sighting_date, presence: true
   enum :status, { pending: "Pendiente", confirmed: "Confirmado", rejected: "Rechazado" }
 
   def status_value
