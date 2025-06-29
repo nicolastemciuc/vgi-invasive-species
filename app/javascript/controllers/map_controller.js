@@ -99,29 +99,32 @@ export default class extends Controller {
 
     // Render path sightings
     this.pathsValue.forEach((sighting) => {
-      const polyline = L.polyline(sighting.path, { color: 'blue' }).addTo(map)
+      const polyline = L.polyline(sighting.path, { color: 'blue' }).addTo(map);
 
       polyline.on('click', () => {
-        Turbo.visit(sighting.url, { frame: 'sighting' })
-      })
-    })
+        map.fitBounds(polyline.getBounds());
+        Turbo.visit(sighting.url, { frame: 'sighting' });
+      });
+    });
 
-    // render point sightings
+    // Render point sightings
     this.pointsValue.forEach((sighting) => {
-      const marker = L.marker([sighting.lat, sighting.lng]).addTo(map)
+      const marker = L.marker([sighting.lat, sighting.lng]).addTo(map);
 
       marker.on('click', () => {
-        Turbo.visit(sighting.url, { frame: 'sighting' })
-      })
-    })
+        map.setView(marker.getLatLng(), 14); // Zoom level 14, adjust as needed
+        Turbo.visit(sighting.url, { frame: 'sighting' });
+      });
+    });
 
-    // render zone sightings
+    // Render zone sightings
     this.zonesValue.forEach((sighting) => {
       const latlngs = sighting.zone.map(p => [p.lat, p.lng]);
 
       const polygon = L.polygon(latlngs, { color: 'green' }).addTo(map);
 
       polygon.on('click', () => {
+        map.fitBounds(polygon.getBounds());
         Turbo.visit(sighting.url, { frame: 'sighting' });
       });
     });
