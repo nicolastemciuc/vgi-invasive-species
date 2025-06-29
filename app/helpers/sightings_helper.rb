@@ -1,45 +1,51 @@
 module SightingsHelper
+  def point_sighting_json(s)
+    {
+      lat: s.point&.latitude,
+      lng: s.point&.longitude,
+      description: s.description,
+      url: sighting_path(s),
+      type: s.type
+    }
+  end
+
+  def path_sighting_json(s)
+    {
+      url: sighting_path(s),
+      type: s.type,
+      path: parse_path(s.path)
+    }
+  end
+
+  def zone_sighting_json(s)
+    {
+      url: sighting_path(s),
+      type: s.type,
+      zone: parse_zone(s.zone),
+      description: s.description
+    }
+  end
+
   def point_sightings_json(sightings)
-    sightings.map do |s|
-      {
-        lat: s.point&.latitude,
-        lng: s.point&.longitude,
-        description: s.description,
-        url: sighting_path(s),
-        type: s.type
-      }
-    end.to_json
+    sightings.map { |s| point_sighting_json(s) }.to_json
   end
 
   def path_sightings_json(sightings)
-    sightings.map do |s|
-      {
-        url: sighting_path(s),
-        type: s.type,
-        path: parse_path(s.path)
-      }
-    end.to_json
+    sightings.map { |s| path_sighting_json(s) }.to_json
   end
 
   def zone_sightings_json(sightings)
-    sightings.map do |s|
-      {
-        url: sighting_path(s),
-        type: s.type,
-        zone: parse_zone(s.zone),
-        description: s.description
-      }
-    end.to_json
+    sightings.map { |s| zone_sighting_json(s) }.to_json
   end
 
   private
 
   def parse_path(path)
     path.points.map do |point|
-    {
-      lat: point.latitude,
-      lng: point.longitude
-    }
+      {
+        lat: point.latitude,
+        lng: point.longitude
+      }
     end
   end
 
