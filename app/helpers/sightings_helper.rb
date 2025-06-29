@@ -21,6 +21,17 @@ module SightingsHelper
     end.to_json
   end
 
+  def zone_sightings_json(sightings)
+    sightings.map do |s|
+      {
+        url: sighting_path(s),
+        type: s.type,
+        zone: parse_zone(s.zone),
+        description: s.description
+      }
+    end.to_json
+  end
+
   private
 
   def parse_path(path)
@@ -29,6 +40,17 @@ module SightingsHelper
       lat: point.latitude,
       lng: point.longitude
     }
+    end
+  end
+
+  def parse_zone(zone)
+    zone = RGeo::GeoJSON.encode(zone)["coordinates"][0]
+
+    zone.map do |point|
+      {
+        lat: point[1],
+        lng: point[0]
+      }
     end
   end
 end

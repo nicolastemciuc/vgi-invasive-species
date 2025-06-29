@@ -10,6 +10,7 @@ export default class extends Controller {
     shadowUrl: String,
     paths: Array,
     points: Array,
+    zones: Array,
   }
 
   connect() {
@@ -43,7 +44,7 @@ export default class extends Controller {
     map.pm.addControls({
       position: 'topleft',
       drawMarker: true,
-      drawPolygon: false,
+      drawPolygon: true,
       drawPolyline: true,
       drawCircle: false,
       drawCircleMarker: false,
@@ -71,6 +72,10 @@ export default class extends Controller {
         const latlngs = shape.layer.getLatLngs();
         const url = `/path_sightings/new?path=${JSON.stringify(latlngs)}`;
         window.location.href = url
+      } else if (shape.shape === 'Polygon') {
+        const latlngs = shape.layer.getLatLngs()[0];
+        const url = `/zone_sightings/new?zone=${JSON.stringify(latlngs)}`;
+        window.location.href = url
       };
 
       map.pm.disableDraw();
@@ -93,5 +98,16 @@ export default class extends Controller {
         Turbo.visit(sighting.url, { frame: 'sighting' })
       })
     })
+
+    // render zone sightings
+    this.zonesValue.forEach((sighting) => {
+      const latlngs = sighting.zone.map(p => [p.lat, p.lng]);
+
+      const polygon = L.polygon(latlngs, { color: 'green' }).addTo(map);
+
+      polygon.on('click', () => {
+        Turbo.visit(sighting.url, { frame: 'sighting' });
+      });
+    });
   }
 }
