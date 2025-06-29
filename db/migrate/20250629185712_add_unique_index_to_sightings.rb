@@ -6,4 +6,3 @@ class AddUniqueIndexToSightings < ActiveRecord::Migration[8.0]
       name: "index_sightings_on_species_user_point"
   end
 end
-
