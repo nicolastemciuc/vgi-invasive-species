@@ -64,21 +64,29 @@ export default class extends Controller {
 
     // Handle the creation of sightings
     map.on("pm:create", (shape) => {
-      var params = "";
+      let params = "";
 
       if (shape.shape === 'Marker') {
         const { lat, lng } = shape.marker._latlng;
-        params = "lat=" + lat + "&lng=" + lng;
+        params = `lat=${lat}&lng=${lng}`;
       } else if (shape.shape === 'Line') {
         const latlngs = shape.layer.getLatLngs();
-        params = "path=" + JSON.stringify(latlngs);
+        params = `path=${encodeURIComponent(JSON.stringify(latlngs))}`;
       } else if (shape.shape === 'Polygon') {
         const latlngs = shape.layer.getLatLngs()[0];
-        params = "zone=" + JSON.stringify(latlngs);
-      };
+        params = `zone=${encodeURIComponent(JSON.stringify(latlngs))}`;
+      }
 
       const url = `/sightings/new?${params}`;
-      window.location.href = url
+
+      fetch(url, {
+        headers: {
+          "Accept": "text/vnd.turbo-stream.html"
+        }
+      })
+        .then(response => response.text())
+        .then(html => Turbo.renderStreamMessage(html));
+
       map.pm.disableDraw();
     });
 

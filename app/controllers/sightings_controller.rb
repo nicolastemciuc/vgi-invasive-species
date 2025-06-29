@@ -37,5 +37,10 @@ class SightingsController < ApplicationController
       @sighting = PathSighting.new(sighting_date:)
       @path = params[:path]
     end
+
+    respond_to do |format|
+      format.turbo_stream
+      format.html
+    end
   end
 end
