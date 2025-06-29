@@ -134,30 +134,61 @@ export default class extends Controller {
   addSightingToMap(sighting, triggerClick = false) {
     if (sighting.type === "PointSighting") {
       const marker = L.marker([sighting.lat, sighting.lng]).addTo(this.map)
+
       marker.on('click', () => {
+        this.highlightLayer(marker)
         this.map.setView(marker.getLatLng(), 14)
         Turbo.visit(sighting.url, { frame: 'sighting' })
       })
+
       if (triggerClick) marker.fire('click')
     }
 
     if (sighting.type === "PathSighting") {
       const polyline = L.polyline(sighting.path, { color: 'blue' }).addTo(this.map)
+
       polyline.on('click', () => {
+        this.highlightLayer(polyline)
         this.map.fitBounds(polyline.getBounds())
         Turbo.visit(sighting.url, { frame: 'sighting' })
       })
+
       if (triggerClick) polyline.fire('click')
     }
 
     if (sighting.type === "ZoneSighting") {
       const latlngs = sighting.zone.map(p => [p.lat, p.lng])
       const polygon = L.polygon(latlngs, { color: 'green' }).addTo(this.map)
+
       polygon.on('click', () => {
+        this.highlightLayer(polygon)
         this.map.fitBounds(polygon.getBounds())
         Turbo.visit(sighting.url, { frame: 'sighting' })
       })
+
       if (triggerClick) polygon.fire('click')
     }
+  }
+
+  highlightLayer(layer) {
+    // Reset previous
+    if (this.selectedLayer) {
+      if (this.selectedLayer.setStyle) {
+        const originalColor = this.selectedLayer.options.originalColor || 'green' // Default for zones
+        this.selectedLayer.setStyle({ color: originalColor })
+      } else if (this.selectedLayer.setIcon) {
+        //TODO: handle markers
+      }
+    }
+
+    // Highlight new
+    if (layer.setStyle) {
+      if (!layer.options.originalColor) {
+        layer.options.originalColor = layer.options.color
+      }
+      layer.setStyle({ color: 'red' })
+    }
+
+    this.selectedLayer = layer
   }
 }
