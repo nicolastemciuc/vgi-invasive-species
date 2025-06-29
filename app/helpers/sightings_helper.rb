@@ -16,7 +16,7 @@ module SightingsHelper
       {
         url: sighting_path(s),
         type: s.type,
-        path: parse_path(s.path),
+        path: parse_path(s.path)
       }
     end.to_json
   end
