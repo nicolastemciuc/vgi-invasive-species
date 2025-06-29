@@ -3,7 +3,7 @@ class PathSightingsController < ApplicationController
   before_action :load_species_map, only: [ :new, :create ]
 
   def new
-    @path_sighting = PathSighting.new
+    @path_sighting = PathSighting.new(sighting_date: Date.today)
     @path = params[:path]
   end
 

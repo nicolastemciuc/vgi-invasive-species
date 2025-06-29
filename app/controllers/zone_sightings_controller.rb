@@ -3,7 +3,7 @@ class ZoneSightingsController < ApplicationController
   before_action :load_species_map, only: [ :new, :create ]
 
   def new
-    @zone_sighting = ZoneSighting.new
+    @zone_sighting = ZoneSighting.new(sighting_date: Date.today)
     @zone = params[:zone]
   end
 

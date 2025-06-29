@@ -17,7 +17,7 @@ class PointSightingsController < ApplicationController
   end
 
   def new
-    @point_sighting = PointSighting.new
+    @point_sighting = PointSighting.new(sighting_date: Date.today)
 
     @latitude = params[:lat]
     @longitude = params[:lng]
