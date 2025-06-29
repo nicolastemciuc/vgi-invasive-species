@@ -22,7 +22,10 @@ class PointSightingsController < ApplicationController
     @sighting.point = factory.point(coordinates["lng"], coordinates["lat"])
 
     if @sighting.save
-      redirect_to sightings_path, notice: "Avistamiento creado exitosamente"
+      respond_to do |format|
+        format.turbo_stream
+        format.html { head :ok }
+      end
     else
       format.turbo_stream { render :new, status: :unprocessable_entity }
       format.html { render :new, status: :unprocessable_entity }
