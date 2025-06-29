@@ -25,7 +25,10 @@ class PathSightingsController < ApplicationController
     @sighting.path = line_string
 
     if @sighting.save
-      redirect_to sightings_path, notice: "Avistamiento creado exitosamente"
+      respond_to do |format|
+        format.turbo_stream
+        format.html { head :ok }
+      end
     else
       format.turbo_stream { render :new, status: :unprocessable_entity }
       format.html { render :new, status: :unprocessable_entity }

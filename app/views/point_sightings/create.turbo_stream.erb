@@ -1,0 +1,7 @@
+<turbo-stream action="remove" target="modal"></turbo-stream>
+
+<turbo-stream action="dispatch" target="map">
+  <template>
+    <%= point_sighting_json(@sighting).html_safe %>
+  </template>
+</turbo-stream>
