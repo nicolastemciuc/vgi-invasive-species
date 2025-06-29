@@ -2,6 +2,6 @@
 
 <turbo-stream action="dispatch" target="map">
   <template>
-    <%= point_sighting_json(@sighting).html_safe %>
+    <%= point_sighting_json(@sighting).to_json %>
   </template>
 </turbo-stream>
