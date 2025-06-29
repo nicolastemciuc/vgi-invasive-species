@@ -4,7 +4,8 @@
     data-map-icon-url-value="<%= asset_path('leaflet/marker-icon.png') %>"
     data-map-icon-retina-url-value="<%= asset_path('leaflet/marker-icon-2x.png') %>"
     data-map-shadow-url-value="<%= asset_path('leaflet/marker-shadow.png') %>"
-    data-map-sightings-value="<%= sightings_json(@sightings) %>"
+    data-map-points-value="<%= point_sightings_json(@point_sightings) %>"
+    data-map-paths-value="<%= path_sightings_json(@path_sightings) %>"
     style="height: calc(100vh - 64px);"
     class="z-0"
   />

@@ -8,7 +8,8 @@ export default class extends Controller {
     iconUrl: String,
     iconRetinaUrl: String,
     shadowUrl: String,
-    sightings: Array,
+    paths: Array,
+    points: Array,
   }
 
   connect() {
@@ -43,7 +44,7 @@ export default class extends Controller {
       position: 'topleft',
       drawMarker: true,
       drawPolygon: false,
-      drawPolyline: false,
+      drawPolyline: true,
       drawCircle: false,
       drawCircleMarker: false,
       drawRectangle: false,
@@ -60,22 +61,37 @@ export default class extends Controller {
       attribution: '&copy; OpenStreetMap contributors',
     }).addTo(map)
 
-    map.on("pm:drawstart", ({ workingLayer }) => {
-      workingLayer.on("pm:snap", (e) => {
-        const { lat, lng } = e.marker._latlng
-        const url = `/point_sightings/new?lat=${lat}&lng=${lng}`
+    // Handle the creation of sightings
+    map.on("pm:create", (shape) => {
+      if (shape.shape === 'Marker') {
+        const { lat, lng } = shape.marker._latlng;
+        const url = `/point_sightings/new?lat=${lat}&lng=${lng}`;
         window.location.href = url
-      });
+      } else if (shape.shape === 'Line') {
+        const latlngs = shape.layer.getLatLngs();
+        const url = `/path_sightings/new?path=${JSON.stringify(latlngs)}`;
+        window.location.href = url
+      };
+
+      map.pm.disableDraw();
     });
 
-    this.sightingsValue.forEach((sighting) => {
-      if (sighting.lat && sighting.lng) {
-        const marker = L.marker([sighting.lat, sighting.lng]).addTo(map)
+    // Render path sightings
+    this.pathsValue.forEach((sighting) => {
+      const polyline = L.polyline(sighting.path, { color: 'blue' }).addTo(map)
 
-        marker.on('click', () => {
-          Turbo.visit(sighting.url, { frame: 'sighting' })
-        })
-      }
+      polyline.on('click', () => {
+        Turbo.visit(sighting.url, { frame: 'sighting' })
+      })
+    })
+
+    // render point sightings
+    this.pointsValue.forEach((sighting) => {
+      const marker = L.marker([sighting.lat, sighting.lng]).addTo(map)
+
+      marker.on('click', () => {
+        Turbo.visit(sighting.url, { frame: 'sighting' })
+      })
     })
   }
 }
