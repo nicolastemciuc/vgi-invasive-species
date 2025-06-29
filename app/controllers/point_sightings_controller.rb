@@ -1,33 +1,31 @@
 class PointSightingsController < ApplicationController
-  before_action :authenticate_user!, only: :create
-  before_action :load_species_map, only: :create
+  before_action :authenticate_user!
+  before_action :load_species_map
 
-  def show
-    @point_sighting = Sighting.find(params[:id])
+  def new
+    @sighting = PointSighting.new(sighting_date: Date.today)
+    @geometry = params[:point]
 
     respond_to do |format|
-      format.html do
-        if turbo_frame_request?
-          render partial: "sightings/sighting_frame", locals: { sighting: @sighting }
-        else
-          redirect_to root_path, notice: "No se encontró el avistamiento"
-        end
-      end
+      format.turbo_stream
+      format.html
     end
   end
 
   def create
     factory = RGeo::Geographic.spherical_factory(srid: 4326)
+    coordinates = JSON.parse(sighting_params[:geometry])
 
-    @point_sighting = current_user.sightings.build(sighting_params.except(:latitude, :longitude))
-    @point_sighting.status = "Pendiente"
-    @point_sighting.type = "PointSighting"
-    @point_sighting.point = factory.point(sighting_params[:longitude], sighting_params[:latitude])
+    @sighting = current_user.sightings.build(sighting_params.except(:geometry))
+    @sighting.status = "Pendiente"
+    @sighting.type = "PointSighting"
+    @sighting.point = factory.point(coordinates["lng"], coordinates["lat"])
 
-    if @point_sighting.save
+    if @sighting.save
       redirect_to sightings_path, notice: "Avistamiento creado exitosamente"
     else
-      render :new, status: :unprocessable_entity
+      format.turbo_stream { render :new, status: :unprocessable_entity }
+      format.html { render :new, status: :unprocessable_entity }
     end
   end
 
@@ -43,7 +41,7 @@ class PointSightingsController < ApplicationController
   private
 
   def sighting_params
-    params.expect(point_sighting: [ :location_desc, :description, :sighting_date, :species_id, :photo, :latitude, :longitude ])
+    params.expect(point_sighting: [ :location_desc, :description, :sighting_date, :species_id, :photo, :geometry ])
   end
 
   def update_params
