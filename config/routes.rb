@@ -2,13 +2,13 @@ Rails.application.routes.draw do
   devise_for :users
 
   root to: "sightings#index"
-  resources :sightings, only: [ :index, :show, :new ]
+  resources :sightings, only: [ :index, :show ]
 
-  resource :point_sightings, only: [ :create, :edit, :update ]
+  resource :point_sightings, only: [ :new, :create, :edit, :update ]
 
-  resource :path_sightings, only: :create
+  resource :path_sightings, only: [ :new, :create ]
 
-  resource :zone_sightings, only: :create
+  resource :zone_sightings, only: [ :new, :create ]
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.

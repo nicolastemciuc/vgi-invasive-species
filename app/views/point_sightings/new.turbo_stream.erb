@@ -1,0 +1,3 @@
+<%= turbo_stream.append_all "body" do %>
+  <%= render "sightings/form", sighting: @sighting, geometry: @geometry %>
+<% end %>

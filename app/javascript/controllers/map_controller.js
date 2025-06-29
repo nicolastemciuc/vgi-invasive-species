@@ -66,23 +66,25 @@ export default class extends Controller {
 
     // Handle the creation of sightings
     map.on("pm:create", (shape) => {
-      let params = "";
+      let url = '';
+      let params = '';
 
       if (shape.shape === 'Marker') {
-        const { lat, lng } = shape.marker._latlng;
-        params = `lat=${lat}&lng=${lng}`;
+        const latlngs = shape.marker.getLatLng();
+        params = `point=${encodeURIComponent(JSON.stringify(latlngs))}`;
+        url = `/point_sightings/new?${params}`;
         temporaryShape = shape.marker;
       } else if (shape.shape === 'Line') {
         const latlngs = shape.layer.getLatLngs();
         params = `path=${encodeURIComponent(JSON.stringify(latlngs))}`;
+        url = `/path_sightings/new?${params}`;
         temporaryShape = shape.layer;
       } else if (shape.shape === 'Polygon') {
         const latlngs = shape.layer.getLatLngs()[0];
         params = `zone=${encodeURIComponent(JSON.stringify(latlngs))}`;
+        url = `/zone_sightings/new?${params}`;
         temporaryShape = shape.layer;
       }
-
-      const url = `/sightings/new?${params}`;
 
       fetch(url, {
         headers: {
