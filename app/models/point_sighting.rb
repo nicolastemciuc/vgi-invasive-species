@@ -24,8 +24,9 @@ end
 #
 # Indexes
 #
-#  index_sightings_on_submitted_by_id  (submitted_by_id)
-#  index_sightings_on_validated_by_id  (validated_by_id)
+#  index_sightings_on_species_user_point  (species_id, submitted_by_id, st_astext(point)) UNIQUE
+#  index_sightings_on_submitted_by_id     (submitted_by_id)
+#  index_sightings_on_validated_by_id     (validated_by_id)
 #
 # Foreign Keys
 #
