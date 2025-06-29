@@ -1,0 +1,36 @@
+<div class="flex justify-center mt-4">
+  <div class="flex flex-col min-w-md">
+    <h2 class="text-3xl font-bold mb-6 text-center">Reportar Avistamiento</h2>
+
+    <%= form_with model: @path_sighting, local: true do |f| %>
+      <%= f.hidden_field :path, value: @path %>
+
+      <div class="flex flex-col">
+        <%= f.label :description, "Descripción del avistamiento", class: "label" %>
+        <%= f.text_area :description, class: "input w-full" %>
+      </div>
+
+      <div class="flex flex-col mb-4">
+        <%= f.label :location_description, "Descripción del lugar del avistamiento", class: "label" %>
+        <%= f.text_area :location_description, class: "input w-full" %>
+      </div>
+
+      <div class="flex flex-col mb-4">
+        <%= f.label :sighting_date, "Fecha del avistamiento", class: "label" %>
+        <%= f.date_field :sighting_date, class: "input w-full" %>
+      </div>
+
+      <div class="flex flex-col mb-4">
+        <%= f.label :species_id, "Especie encontrada", class: "label" %>
+        <%= f.select :species_id, @species_map, {}, class: "select w-full" %>
+      </div>
+
+      <div class="flex flex-col mb-5">
+        <%= f.label :photo, "Foto del avistamiento", class: "label" %>
+        <%= f.file_field :photo, class: "file-input w-full" %>
+      </div>
+
+      <%= f.submit "Reportar", class: "btn btn-primary w-full" %>
+    <% end %>
+  </div>
+</div>
