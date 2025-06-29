@@ -2,6 +2,7 @@ class SightingsController < ApplicationController
   def index
     @point_sightings = current_user&.expert? || current_user&.admin? ? PointSighting.all : PointSighting.confirmed
     @path_sightings = current_user&.expert? || current_user&.admin? ? PathSighting.all : PathSighting.confirmed
+    @zone_sightings = current_user&.expert? || current_user&.admin? ? ZoneSighting.all : ZoneSighting.confirmed
   end
 
   def show

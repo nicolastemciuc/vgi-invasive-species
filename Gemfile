@@ -47,7 +47,10 @@ gem "byebug"
 # gem "image_processing", "~> 1.2"
 
 gem "activerecord-postgis-adapter", "~> 11.0"
+
 gem "devise", "~> 4.9"
+
+gem "rgeo-geojson"
 
 gem "heroicons", "~> 2.1"
 
