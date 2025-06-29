@@ -1,6 +1,6 @@
 class PointSightingsController < ApplicationController
-  before_action :authenticate_user!, only: [ :new, :create ]
-  before_action :load_species_map, only: [ :new, :create ]
+  before_action :authenticate_user!, only: :create
+  before_action :load_species_map, only: :create
 
   def show
     @point_sighting = Sighting.find(params[:id])
@@ -14,13 +14,6 @@ class PointSightingsController < ApplicationController
         end
       end
     end
-  end
-
-  def new
-    @point_sighting = PointSighting.new(sighting_date: Date.today)
-
-    @latitude = params[:lat]
-    @longitude = params[:lng]
   end
 
   def create
@@ -55,9 +48,5 @@ class PointSightingsController < ApplicationController
 
   def update_params
     params.expect(point_sighting: [ :status ])
-  end
-
-  def load_species_map
-    @species_map = Species.all.map { |s| [ "#{s.common_name} (#{s.scientific_name})", s.id ] }
   end
 end

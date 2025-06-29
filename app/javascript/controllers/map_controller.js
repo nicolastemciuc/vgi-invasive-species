@@ -64,20 +64,21 @@ export default class extends Controller {
 
     // Handle the creation of sightings
     map.on("pm:create", (shape) => {
+      var params = "";
+
       if (shape.shape === 'Marker') {
         const { lat, lng } = shape.marker._latlng;
-        const url = `/point_sightings/new?lat=${lat}&lng=${lng}`;
-        window.location.href = url
+        params = "lat=" + lat + "&lng=" + lng;
       } else if (shape.shape === 'Line') {
         const latlngs = shape.layer.getLatLngs();
-        const url = `/path_sightings/new?path=${JSON.stringify(latlngs)}`;
-        window.location.href = url
+        params = "path=" + JSON.stringify(latlngs);
       } else if (shape.shape === 'Polygon') {
         const latlngs = shape.layer.getLatLngs()[0];
-        const url = `/zone_sightings/new?zone=${JSON.stringify(latlngs)}`;
-        window.location.href = url
+        params = "zone=" + JSON.stringify(latlngs);
       };
 
+      const url = `/sightings/new?${params}`;
+      window.location.href = url
       map.pm.disableDraw();
     });
 

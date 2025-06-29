@@ -1,11 +1,6 @@
 class ZoneSightingsController < ApplicationController
-  before_action :authenticate_user!, only: [ :new, :create ]
-  before_action :load_species_map, only: [ :new, :create ]
-
-  def new
-    @zone_sighting = ZoneSighting.new(sighting_date: Date.today)
-    @zone = params[:zone]
-  end
+  before_action :authenticate_user!, only: :create
+  before_action :load_species_map, only: :create
 
   def create
     factory = RGeo::Geographic.spherical_factory(srid: 4326)
@@ -31,9 +26,5 @@ class ZoneSightingsController < ApplicationController
 
   def sighting_params
     params.expect(zone_sighting: [ :location_desc, :description, :sighting_date, :species_id, :photo, :zone ])
-  end
-
-  def load_species_map
-    @species_map = Species.all.map { |s| [ "#{s.common_name} (#{s.scientific_name})", s.id ] }
   end
 end
