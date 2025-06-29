@@ -1,12 +1,14 @@
+<h1 class="flex-1 text-3xl font-bold text-center text-primary m-4">Usuarios</h1>
+
 <div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100 mx-4">
   <table class="table">
     <thead>
       <tr>
         <th>Id</th>
         <th>Email</th>
-        <th>Role</th>
-        <th>Created At</th>
-        <th>Updated At</th>
+        <th>Rol</th>
+        <th>Fecha de Creación</th>
+        <th>Fecha de Actualización</th>
       </tr>
     </thead>
     <tbody>
@@ -17,9 +19,13 @@
           <td><%= user.role.titleize %></td>
           <td><%= user.created_at.to_fs %></td>
           <td><%= user.updated_at.to_fs %></td>
-          <td class="flex">
-            <%= link_to 'Edit', edit_admin_user_path(user), class: "btn btn-sm btn-outline mr-2" %>
-            <%= button_to 'Delete', admin_user_path(user), method: :delete, class: "btn btn-sm btn-error" %>
+          <td class="flex justify-end">
+            <%= link_to edit_admin_user_path(user), class: 'btn btn-sm btn-outline mr-2' do %>
+              <%= heroicon 'pencil', options: { class: 'size-4' } %>
+            <% end %>
+            <%= button_to admin_user_path(user), method: :delete, class: 'btn btn-sm btn-outline btn-error' do %>
+              <%= heroicon 'trash', options: { class: 'size-4' } %>
+            <% end %>
           </td>
         </tr>
       <% end %>

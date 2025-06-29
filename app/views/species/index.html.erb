@@ -28,7 +28,7 @@
           <td><%= species.class_name %></td>
           <td><%= species.phylum %></td>
           <% if current_user&.admin? || current_user&.expert? %>
-            <td class="flex">
+            <td class="flex justify-end">
               <%= link_to edit_species_path(species), class: 'btn btn-sm btn-outline mr-2' do %>
                 <%= heroicon 'pencil', options: { class: 'size-4' } %>
               <% end %>
