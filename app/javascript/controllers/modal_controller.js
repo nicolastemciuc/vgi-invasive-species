@@ -8,5 +8,8 @@ export default class extends Controller {
   close() {
     this.element.close()
     this.element.remove()
+
+    const event = new CustomEvent("modal:closed");
+    window.dispatchEvent(event);
   }
 }

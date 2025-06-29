@@ -62,6 +62,8 @@ export default class extends Controller {
       attribution: '&copy; OpenStreetMap contributors',
     }).addTo(map)
 
+    let temporaryShape = null;
+
     // Handle the creation of sightings
     map.on("pm:create", (shape) => {
       let params = "";
@@ -69,12 +71,15 @@ export default class extends Controller {
       if (shape.shape === 'Marker') {
         const { lat, lng } = shape.marker._latlng;
         params = `lat=${lat}&lng=${lng}`;
+        temporaryShape = shape.marker;
       } else if (shape.shape === 'Line') {
         const latlngs = shape.layer.getLatLngs();
         params = `path=${encodeURIComponent(JSON.stringify(latlngs))}`;
+        temporaryShape = shape.layer;
       } else if (shape.shape === 'Polygon') {
         const latlngs = shape.layer.getLatLngs()[0];
         params = `zone=${encodeURIComponent(JSON.stringify(latlngs))}`;
+        temporaryShape = shape.layer;
       }
 
       const url = `/sightings/new?${params}`;
@@ -117,6 +122,13 @@ export default class extends Controller {
       polygon.on('click', () => {
         Turbo.visit(sighting.url, { frame: 'sighting' });
       });
+    });
+
+    window.addEventListener("modal:closed", () => {
+      if (temporaryShape) {
+        map.removeLayer(temporaryShape);
+        temporaryShape = null;
+      }
     });
   }
 }
